@@ -40,8 +40,7 @@ jobs:
     # placeholder to your GitHub name.
     # If you do not wish to use codecov, then simply delete this job from the
     # workflow.
-    if: github.repository_owner == '<name>'
-      && false
+    if: github.repository_owner == 'Phytolizer'
 
     steps:
     - uses: actions/checkout@v1
