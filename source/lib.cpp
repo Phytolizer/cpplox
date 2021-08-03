@@ -46,11 +46,9 @@ int library::run_prompt()
   return 0;
 }
 
-// this will need to be non-static later
-// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 void library::run(std::string_view source)
 {
-  auto scanner = lox::scanner {source};
+  auto scanner = lox::scanner {this, source};
   auto tokens = scanner.scan_tokens();
 
   // for now, just print the tokens

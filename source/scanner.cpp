@@ -1,3 +1,4 @@
+#include <lib.hpp>
 #include <scanner.hpp>
 
 bool lox::scanner::is_at_end() const
@@ -39,6 +40,8 @@ void lox::scanner::scan_token()
     case '*':
       add_token(token_type::star);
       break;
+    default:
+      m_lib->error(m_line, "Unexpected character.");
   }
 }
 
@@ -55,8 +58,9 @@ void lox::scanner::add_token(token_type type, object literal)
   m_tokens.emplace_back(type, std::move(text), std::move(literal), m_line);
 }
 
-lox::scanner::scanner(std::string_view source)
-    : m_source {source}
+lox::scanner::scanner(library* lib, std::string_view source)
+    : m_lib {lib}
+    , m_source {source}
     , m_start {0}
     , m_current {0}
     , m_line {1}
