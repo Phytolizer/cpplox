@@ -47,6 +47,9 @@ struct fmt::formatter<lox::token>
       if (const double* dp = std::get_if<double>(ptr); dp) {
         return format_to(out, "{}", *dp);
       }
+      if (const std::string* sp = std::get_if<std::string>(ptr); sp) {
+        return format_to(out, "{}", *sp);
+      }
       throw std::logic_error {"invalid token"};
     }
     return format_to(out, "null");

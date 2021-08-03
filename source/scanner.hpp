@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string_view>
+#include <unordered_map>
 #include <vector>
 
 #include <token.hpp>
@@ -18,10 +19,21 @@ class scanner
   int m_current;
   int m_line;
 
+  static const std::unordered_map<std::string_view, token_type> keywords;
+
   [[nodiscard]] bool is_at_end() const;
   void scan_token();
-  [[nodiscard]] char advance();
+  char advance();
   void add_token(token_type type, object literal = object {});
+  [[nodiscard]] bool match(char expected);
+  [[nodiscard]] char peek();
+  [[nodiscard]] char peek_next();
+  void string();
+  void number();
+  void identifier();
+  [[nodiscard]] static bool is_digit(char c);
+  [[nodiscard]] static bool is_alpha(char c);
+  [[nodiscard]] static bool is_alpha_numeric(char c);
 
 public:
   explicit scanner(library* lib, std::string_view source);
