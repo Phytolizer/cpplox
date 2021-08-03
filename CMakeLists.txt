@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.14)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(fmt)
+add_subdirectory(GSL)
 include(cmake/in-source-guard.cmake)
 
 project(
@@ -31,7 +32,7 @@ target_include_directories(
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
 
-target_link_libraries(cpplox_lib PUBLIC fmt::fmt)
+target_link_libraries(cpplox_lib PUBLIC fmt::fmt Microsoft.GSL::GSL)
 
 target_compile_features(cpplox_lib PUBLIC cxx_std_20)
 
