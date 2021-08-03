@@ -9,8 +9,19 @@ namespace lox
 {
 class scanner
 {
+  std::string_view m_source;
+  std::vector<token> m_tokens;
+  int m_start;
+  int m_current;
+  int m_line;
+
+  [[nodiscard]] bool is_at_end() const;
+  void scan_token();
+  [[nodiscard]] char advance();
+  void add_token(token_type type, object literal = object {});
+
 public:
   explicit scanner(std::string_view source);
-  std::vector<token> scan_tokens();
+  [[nodiscard]] std::vector<token> scan_tokens();
 };
 }  // namespace lox

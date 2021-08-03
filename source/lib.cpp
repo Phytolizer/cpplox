@@ -2,15 +2,18 @@
 #include <fstream>
 #include <iostream>
 
+#include <fmt/format.h>
+#include <fmt/ostream.h>
 #include <lib.hpp>
 #include <scanner.hpp>
 
 library::library()
-    : name("cpplox")
+    : name {"cpplox"}
+    , had_error {false}
 {
 }
 
-void library::run_file(std::string_view filename)
+int library::run_file(std::string_view filename)
 {
   std::ifstream file {std::string {filename}};
   std::string line;
@@ -21,20 +24,30 @@ void library::run_file(std::string_view filename)
     bytes.push_back('\n');
   }
   run(bytes);
+
+  if (had_error) {
+    return 65;
+  }
+  return 0;
 }
 
-void library::run_prompt()
+int library::run_prompt()
 {
   while (true) {
-    std::cout << "> " << std::flush;
+    fmt::print("> ");
     std::string line;
     if (!std::getline(std::cin, line)) {
+      fmt::print("\n");
       break;
     }
     run(line);
   }
+
+  return 0;
 }
 
+// this will need to be non-static later
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 void library::run(std::string_view source)
 {
   auto scanner = lox::scanner {source};
@@ -42,6 +55,17 @@ void library::run(std::string_view source)
 
   // for now, just print the tokens
   for (const auto& token : tokens) {
-    std::cout << token << "\n";
+    fmt::print("{}\n", token);
   }
+}
+
+void library::error(int line, std::string_view message)
+{
+  report(line, "", message);
+}
+
+void library::report(int line, std::string_view where, std::string_view message)
+{
+  fmt::print(std::cerr, "[line {}] Error{}: {}\n", line, where, message);
+  had_error = true;
 }

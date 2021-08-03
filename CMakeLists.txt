@@ -20,6 +20,8 @@ include(cmake/variables.cmake)
 add_library(
     cpplox_lib OBJECT
     source/lib.cpp
+    source/scanner.cpp
+    source/token.cpp
 )
 
 target_include_directories(
@@ -27,6 +29,9 @@ target_include_directories(
     PUBLIC
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
+
+find_package(fmt REQUIRED)
+target_link_libraries(cpplox_lib PUBLIC fmt::fmt)
 
 target_compile_features(cpplox_lib PUBLIC cxx_std_20)
 
