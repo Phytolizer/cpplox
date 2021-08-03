@@ -11,7 +11,7 @@ namespace lox
 {
 class scanner
 {
-  library *m_lib;
+  library* m_lib;
   std::string_view m_source;
   std::vector<token> m_tokens;
   int m_start;
@@ -24,7 +24,7 @@ class scanner
   void add_token(token_type type, object literal = object {});
 
 public:
-  explicit scanner(library *lib, std::string_view source);
+  explicit scanner(library* lib, std::string_view source);
   [[nodiscard]] std::vector<token> scan_tokens();
 };
 }  // namespace lox
