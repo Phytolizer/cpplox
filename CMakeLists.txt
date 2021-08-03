@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+add_subdirectory(fmt)
 include(cmake/in-source-guard.cmake)
 
 project(
@@ -30,7 +31,6 @@ target_include_directories(
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
 
-find_package(fmt REQUIRED)
 target_link_libraries(cpplox_lib PUBLIC fmt::fmt)
 
 target_compile_features(cpplox_lib PUBLIC cxx_std_20)
