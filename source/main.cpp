@@ -1,7 +1,7 @@
 #include <cstddef>
 #include <fmt/core.h>
-#include <gsl/span>
 #include <lib.hpp>
+#include <span>
 #include <string>
 
 int main(int argc, char* argv[]) {
