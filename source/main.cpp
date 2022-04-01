@@ -1,19 +1,19 @@
+#include <cstddef>
+#include <fmt/core.h>
 #include <gsl/span>
-#include <iostream>
 #include <lib.hpp>
 #include <string>
 
 int main(int argc, char* argv[]) {
-    gsl::span args{argv, static_cast<gsl::span<char, gsl::dynamic_extent>::size_type>(argc)};
+    std::span args{argv, static_cast<std::size_t>(argc)};
     library lib;
     if (args.size() > 2) {
-        std::cout << "Usage: " << args[0] << " [script]\n";
+        fmt::print("Usage: {} [script]\n", args[0]);
         return 64;
     }
     if (args.size() == 2) {
-        lib.run_file(args[1]);
+        return lib.run_file(args[1]);
     } else {
-        lib.run_prompt();
+        return lib.run_prompt();
     }
-    return 0;
 }

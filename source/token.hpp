@@ -22,21 +22,19 @@ struct token {
 std::ostream& operator<<(std::ostream& os, const lox::token& token);
 
 template <> struct fmt::formatter<lox::token> {
-    // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
     constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
         return ctx.begin();
     }
 
     template <typename FormatContext>
     auto format(const lox::token& token, FormatContext& ctx) -> decltype(ctx.out()) {
-        auto out = format_to(ctx.out(), "{} {} ", token.type, token.lexeme);
+        auto out = format_to(ctx.out(), "{} '{}' ", token.type, token.lexeme);
         if (token.literal) {
-            const lox::object::value_type* ptr = &*token.literal;
-            if (const double* dp = std::get_if<double>(ptr); dp) {
-                return format_to(out, "{}", *dp);
-            }
-            if (const std::string* sp = std::get_if<std::string>(ptr); sp) {
-                return format_to(out, "{}", *sp);
+            switch (token.literal->index()) {
+                case lox::object_kind::number:
+                    return format_to(out, "{}", std::get<lox::object_kind::number>(*token.literal));
+                case lox::object_kind::string:
+                    return format_to(out, "{}", std::get<lox::object_kind::string>(*token.literal));
             }
             throw std::logic_error{"invalid token"};
         }
