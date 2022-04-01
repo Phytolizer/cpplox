@@ -12,5 +12,5 @@ enum kind
     number = 0,
     string = 1,
 };
-} // namespace obj
+} // namespace object_kind
 } // namespace lox
