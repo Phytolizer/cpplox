@@ -1,20 +1,20 @@
 ---
 # Enable ALL the things! Except not really
 # misc-non-private-member-variables-in-classes: the options don't do anything
-Checks: "*,\
-  -google-readability-todo,\
-  -altera-unroll-loops,\
-  -fuchsia-*,\
-  fuchsia-multiple-inheritance,\
-  -llvm-header-guard,\
-  -llvm-include-order,\
-  -llvmlibc-*,\
-  -misc-non-private-member-variables-in-classes,\
-  -modernize-use-trailing-return-type,\
-  -altera-struct-pack-align,\
-  -cppcoreguidelines-avoid-magic-numbers,\
-  -readability-magic-numbers,\
-  -cert-err58-cpp"
+Checks: |
+  -google-readability-todo,
+  -altera-*,
+  -fuchsia-*,
+  fuchsia-multiple-inheritance,
+  -llvm-header-guard,
+  -llvm-include-order,
+  -llvmlibc-*,
+  -misc-non-private-member-variables-in-classes,
+  -modernize-use-trailing-return-type,
+  -altera-struct-pack-align,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -readability-magic-numbers,
+  -cert-err58-cpp,
 WarningsAsErrors: ''
 CheckOptions:
   - key: 'bugprone-argument-comment.StrictMode'

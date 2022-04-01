@@ -1,10 +1,9 @@
 #pragma once
 
 #include <optional>
-#include <variant>
 #include <string>
+#include <variant>
 
-namespace lox
-{
+namespace lox {
 using object = std::optional<std::variant<double, std::string>>;
-}  // namespace lox
+} // namespace lox
