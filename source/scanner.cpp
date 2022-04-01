@@ -212,7 +212,7 @@ bool lox::scanner::is_digit(char c) {
 }
 
 bool lox::scanner::is_alpha(char c) {
-    return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '_';
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
 }
 
 bool lox::scanner::is_alpha_numeric(char c) {

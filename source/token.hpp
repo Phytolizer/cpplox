@@ -24,11 +24,7 @@ std::ostream& operator<<(std::ostream& os, const lox::token& token);
 template <> struct fmt::formatter<lox::token> {
     // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
     constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
-        const auto* it = ctx.begin();
-        if (it != ctx.end() && *it != '}') {
-            throw format_error{"invalid format"};
-        }
-        return it;
+        return ctx.begin();
     }
 
     template <typename FormatContext>

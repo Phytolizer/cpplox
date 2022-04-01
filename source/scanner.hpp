@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <string_view>
 #include <token.hpp>
 #include <unordered_map>
@@ -12,9 +13,9 @@ class scanner {
     library* m_lib;
     std::string_view m_source;
     std::vector<token> m_tokens;
-    int m_start;
-    int m_current;
-    int m_line;
+    std::size_t m_start;
+    std::size_t m_current;
+    std::size_t m_line;
 
     static const std::unordered_map<std::string_view, token_type> keywords;
 

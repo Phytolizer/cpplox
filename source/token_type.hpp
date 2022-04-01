@@ -1,7 +1,11 @@
 #pragma once
 
+#include <fmt/core.h>
+#include <magic_enum.hpp>
+
 namespace lox {
-enum class token_type {
+enum class token_type
+{
     left_paren,
     right_paren,
     left_brace,
@@ -45,3 +49,14 @@ enum class token_type {
     eof
 };
 } // namespace lox
+
+template <> struct fmt::formatter<lox::token_type> {
+    constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const lox::token_type& type, FormatContext& ctx) -> decltype(ctx.out()) {
+        return format_to(ctx.out(), "{}", magic_enum::enum_name(type));
+    }
+};
